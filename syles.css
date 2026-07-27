@@ -1,0 +1,98 @@
+/* --- Global Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #E0E0E0; /* Light Grey Background */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header --- */
+.site-header {
+    background-color: #000040; /* Dark Navy Background */
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.site-header h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+/* --- Main Content Grid --- */
+.main-content {
+    flex: 1; /* Pushes footer down */
+    padding: 60px 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1f); /* 4 equal columns */
+    grid-template-rows: repeat(3, 150px); /* 3 equal rows of 150px height */
+    gap: 20px; /* Space between grid items */
+    justify-items: center; /* Centers items horizontally in their cell */
+    align-items: center;   /* Centers items vertically in their cell */
+}
+
+.grid-item {
+    width: 120px;  /* Fixed size for the squares */
+    height: 120px;
+}
+
+/* --- Specific Item Placement --- */
+
+/* First square: Row 1, Column 1 */
+.grid-item:nth-child(1) {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+/* "stuff" text: Row 2, Column 2 */
+.light-text {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    color: #757575; /* Mid-grey for "stuff" */
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Second square: Row 2, Column 3 */
+.grid-item:nth-child(3) {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+/* Third square: Row 3, Column 4 */
+.grid-item:nth-child(4) {
+    grid-column: 4 / 5;
+    grid-row: 3 / 4;
+}
+
+/* Square styles */
+.dark-square {
+    background-color: #333333; /* Dark Grey for squares */
+}
+
+/* --- Footer --- */
+.site-footer {
+    background-color: #000040;
+    color: #BDBDBD; /* Lighter grey for footer text */
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+}
