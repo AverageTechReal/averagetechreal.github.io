@@ -1,0 +1,1 @@
+# averagetech.github.io
