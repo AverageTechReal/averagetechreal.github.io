@@ -3,19 +3,17 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body, html {
     width: 100%;
-    height: 100%;
     font-family: Helvetica, Arial, sans-serif;
-    overflow: hidden;
+    background: #050520;
 }
-
 .hero-container {
     position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, #050520, #1a0b36, #002b49);
@@ -23,7 +21,6 @@ body, html {
     animation: gradientFadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, 
                gradientDirectionSwitch 2.6s cubic-bezier(0.25, 1, 0.5, 1) 2s forwards;
 }
-
 .hero-container::before {
     content: '';
     position: absolute;
@@ -39,7 +36,6 @@ body, html {
     animation: barAppear 2.6s cubic-bezier(0.25, 1, 0.5, 1) 2s forwards;
     z-index: 1;
 }
-
 .fade-in-text {
     position: absolute;
     left: 50%;
@@ -53,6 +49,138 @@ body, html {
                textMoveToBar 2.6s cubic-bezier(0.25, 1, 0.5, 1) 2s forwards;
     z-index: 2;
 }
+.fade-in-name {
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: nameAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+    z-index: 2;
+}
+
+/* ---------- Sections below hero ---------- */
+.page-section {
+    min-height: 60vh;
+    padding: 100px 10%;
+    color: #ffffff;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.page-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+.page-section p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+/* ---------- Menu toggle button ---------- */
+.menu-toggle {
+    position: fixed;
+    top: 45px;
+    right: 40px;
+    width: 40px;
+    height: 34px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    animation: barAppear 2.6s cubic-bezier(0.25, 1, 0.5, 1) 2s forwards;
+}
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(16px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-16px) rotate(-45deg);
+}
+
+/* ---------- Overlay ---------- */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 15;
+}
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    max-width: 80%;
+    height: 100vh;
+    background: rgba(10, 10, 30, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    transform: translateX(100%);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+}
+.sidebar.active {
+    transform: translateX(0);
+}
+.sidebar-close {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    margin-bottom: 40px;
+}
+.sidebar-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+.sidebar-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    opacity: 0.85;
+    transition: opacity 0.2s ease, padding-left 0.2s ease;
+}
+.sidebar-link:hover {
+    opacity: 1;
+    padding-left: 6px;
+}
 
 @keyframes gradientFadeIn {
     0% {
@@ -64,7 +192,6 @@ body, html {
         background-position: 100% 50%;
     }
 }
-
 @keyframes gradientDirectionSwitch {
     0% {
         background: linear-gradient(135deg, #050520, #1a0b36, #002b49);
@@ -73,7 +200,6 @@ body, html {
         background: linear-gradient(-180deg, #050520, #1a0b36, #002b49);
     }
 }
-
 @keyframes textAppear {
     0% {
         opacity: 0;
@@ -84,7 +210,6 @@ body, html {
         transform: translate(-50%, 0);
     }
 }
-
 @keyframes textMoveToBar {
     0% {
         top: 50%;
@@ -95,7 +220,16 @@ body, html {
         transform: translate(-50%, -50%) scale(0.75);
     }
 }
-
+@keyframes nameAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
 @keyframes barAppear {
     0% {
         opacity: 0;
