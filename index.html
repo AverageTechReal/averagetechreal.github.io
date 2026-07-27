@@ -8,9 +8,52 @@
 </head>
 <body>
 
+    <!-- Sidebar toggle button -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Dimming overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">&times;</button>
+        <ul class="sidebar-links">
+            <li><a href="#about" class="sidebar-link">About Me</a></li>
+            <li><a href="#projects" class="sidebar-link">Projects</a></li>
+            <li><a href="#music" class="sidebar-link">My Music</a></li>
+            <li><a href="#socials" class="sidebar-link">Socials</a></li>
+        </ul>
+    </nav>
+
     <div class="hero-container">
         <h1 class="fade-in-text">average tech™</h1>
+        <p class="fade-in-name">Your Name</p>
     </div>
 
+    <section id="about" class="page-section">
+        <h2>About Me</h2>
+        <p>Write a little about yourself here.</p>
+    </section>
+
+    <section id="projects" class="page-section">
+        <h2>Projects</h2>
+        <p>Showcase your projects here.</p>
+    </section>
+
+    <section id="music" class="page-section">
+        <h2>My Music</h2>
+        <p>Share your music here.</p>
+    </section>
+
+    <section id="socials" class="page-section">
+        <h2>Socials</h2>
+        <p>Link your social profiles here.</p>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
