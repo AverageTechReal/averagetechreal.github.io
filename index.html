@@ -3,136 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>average tech</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --accent-color: #38bdf8;
-            --accent-hover: #0ea5e9;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            text-align: center;
-            padding: 3rem 1rem 1rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            color: var(--accent-color);
-        }
-
-        p.subtitle {
-            color: #94a3b8;
-            margin-top: 0.5rem;
-        }
-
-        main {
-            flex: 1;
-            max-width: 800px;
-            width: 90%;
-            margin: 2rem auto;
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-        }
-
-        .card h2 {
-            margin-top: 0;
-            color: var(--accent-color);
-        }
-
-        button {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            border: none;
-            padding: 0.75rem 1.25rem;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        button:hover {
-            background-color: var(--accent-hover);
-        }
-
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            color: #64748b;
-            font-size: 0.875rem;
-            border-top: 1px solid #1e293b;
-        }
-    </style>
+    <title>AVERAGE TECH</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1 id="main-title">average tech</h1>
-        <p class="subtitle">Welcome to my official GitHub Pages site.</p>
+    <header class="site-header">
+        <div class="container">
+            <h1>AVERAGE TECH™</h1>
+        </div>
     </header>
 
-    <main>
-        <section class="card">
-            <h2>About</h2>
-            <p>This is where you can share information about your tech tutorials, video game music arrangements, or coding projects.</p>
-        </section>
-
-        <section class="card">
-            <h2>Interactive Element</h2>
-            <p>Click the button below to dynamically change the header text using JavaScript!</p>
-            <button id="action-btn">Click Me</button>
-        </section>
+    <main class="main-content">
+        <div class="container grid-container">
+            <div class="grid-item dark-square"></div>
+            <div class="grid-item light-text">stuff</div>
+            <div class="grid-item dark-square"></div>
+            <div class="grid-item dark-square"></div>
+        </div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 average tech. Published with GitHub Pages.</p>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 AVERAGE TECH™. All rights reserved.</p>
+        </div>
     </footer>
-
-    <script>
-        // JavaScript functionality
-        const button = document.getElementById('action-btn');
-        const title = document.getElementById('main-title');
-
-        const phrases = [
-            "average tech",
-            "Welcome to the site!",
-            "Code & Soundtracks",
-            "Powered by GitHub Pages"
-        ];
-
-        let index = 0;
-
-        button.addEventListener('click', () => {
-            index = (index + 1) % phrases.length;
-            title.textContent = phrases[index];
-        });
-    </script>
 
 </body>
 </html>
