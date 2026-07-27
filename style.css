@@ -8,6 +8,7 @@ body, html {
     width: 100%;
     height: 100%;
     font-family: Helvetica, Arial, sans-serif;
+    overflow: hidden;
 }
 
 .hero-container {
@@ -18,7 +19,8 @@ body, html {
     align-items: center;
     background: linear-gradient(135deg, #050520, #1a0b36, #002b49);
     background-size: 200% 200%;
-    animation: gradientFadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: gradientFadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, 
+               gradientDirectionSwitch 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards;
 }
 
 .fade-in-text {
@@ -29,7 +31,24 @@ body, html {
     text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
     opacity: 0;
     transform: translateY(25px);
-    animation: textAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    animation: textAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards, 
+               textMoveToBar 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards;
+}
+
+.hero-container::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 120px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: barAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards;
 }
 
 @keyframes gradientFadeIn {
@@ -43,10 +62,39 @@ body, html {
     }
 }
 
+@keyframes gradientDirectionSwitch {
+    0% {
+        background: linear-gradient(135deg, #050520, #1a0b36, #002b49);
+    }
+    100% {
+        background: linear-gradient(0deg, #050520, #1a0b36, #002b49);
+    }
+}
+
 @keyframes textAppear {
     0% {
         opacity: 0;
         transform: translateY(25px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textMoveToBar {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes barAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
     }
     100% {
         opacity: 1;
