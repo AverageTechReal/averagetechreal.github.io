@@ -8,6 +8,20 @@
 </head>
 <body>
 
+    <!-- Animated background -->
+    <div class="site-bg">
+        <div class="lines-layer"></div>
+        <div class="gradient-layer"></div>
+    </div>
+
+    <!-- Splash title that shrinks into the top bar -->
+    <div class="hero-container">
+        <h1 class="fade-in-text">Placeholder</h1>
+        <p class="fade-in-name">Placeholder 2</p>
+    </div>
+
+    <div class="top-bar-bg"></div>
+
     <!-- Sidebar toggle button -->
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
         <span></span>
@@ -22,37 +36,35 @@
     <nav class="sidebar" id="sidebar">
         <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">&times;</button>
         <ul class="sidebar-links">
-            <li><a href="#about" class="sidebar-link">About Me</a></li>
+            <li><a href="#about" class="sidebar-link current">About Me</a></li>
             <li><a href="#projects" class="sidebar-link">Projects</a></li>
             <li><a href="#music" class="sidebar-link">My Music</a></li>
             <li><a href="#socials" class="sidebar-link">Socials</a></li>
         </ul>
     </nav>
 
-    <div class="hero-container">
-        <h1 class="fade-in-text">average tech™</h1>
-        <p class="fade-in-name">Your Name</p>
-    </div>
+    <!-- Main content: only one section visible at a time -->
+    <main class="content-area" id="contentArea">
+        <section id="about" class="page-section active">
+            <h2>About Me</h2>
+            <p>Placeholder</p>
+        </section>
 
-    <section id="about" class="page-section">
-        <h2>About Me</h2>
-        <p>Write a little about yourself here.</p>
-    </section>
+        <section id="projects" class="page-section">
+            <h2>Projects</h2>
+            <p>Placeholder.</p>
+        </section>
 
-    <section id="projects" class="page-section">
-        <h2>Projects</h2>
-        <p>Showcase your projects here.</p>
-    </section>
+        <section id="music" class="page-section">
+            <h2>My Music</h2>
+            <p>PLaceholder</p>
+        </section>
 
-    <section id="music" class="page-section">
-        <h2>My Music</h2>
-        <p>Share your music here.</p>
-    </section>
-
-    <section id="socials" class="page-section">
-        <h2>Socials</h2>
-        <p>Link your social profiles here.</p>
-    </section>
+        <section id="socials" class="page-section">
+            <h2>Socials</h2>
+            <p>pLACEHOLDER.</p>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
