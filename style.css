@@ -23,7 +23,10 @@ h1, h2 {
 }
 .lines-layer {
     position: absolute;
-    inset: -120px;
+    top: -100px;
+    left: -100px;
+    width: calc(100% + 200px);
+    height: calc(100% + 200px);
     background-image: repeating-linear-gradient(
         45deg,
         #0a1128 0px,
@@ -32,6 +35,7 @@ h1, h2 {
         #24406e 84px
     );
     animation: linesDrift 14s linear infinite;
+    will-change: transform;
 }
 .gradient-layer {
     position: absolute;
@@ -44,8 +48,8 @@ h1, h2 {
                gradientDirectionSwitch 2.6s cubic-bezier(0.25, 1, 0.5, 1) 2s forwards;
 }
 @keyframes linesDrift {
-    0% { background-position: 0 0; }
-    100% { background-position: 168px 168px; }
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(84px, 84px); }
 }
 
 /* ---------- Splash / title bar ---------- */
@@ -54,6 +58,9 @@ h1, h2 {
     inset: 0;
     z-index: 3;
     pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .top-bar-bg {
     position: fixed;
