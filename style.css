@@ -3,38 +3,72 @@
     padding: 0;
     box-sizing: border-box;
 }
-body, html {
+html, body {
     width: 100%;
+    height: 100%;
     font-family: Helvetica, Arial, sans-serif;
-    background: #050520;
+    overflow: hidden;
+    background: #0a1128;
 }
-.hero-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+h1, h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* ---------- Animated background ---------- */
+.site-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+}
+.lines-layer {
+    position: absolute;
+    inset: -120px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #0a1128 0px,
+        #0a1128 42px,
+        #24406e 42px,
+        #24406e 84px
+    );
+    animation: linesDrift 14s linear infinite;
+}
+.gradient-layer {
+    position: absolute;
+    inset: 0;
     background: linear-gradient(135deg, #050520, #1a0b36, #002b49);
     background-size: 200% 200%;
-    animation: gradientFadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, 
+    mix-blend-mode: multiply;
+    opacity: 0;
+    animation: gradientFadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards,
                gradientDirectionSwitch 2.6s cubic-bezier(0.25, 1, 0.5, 1) 2s forwards;
 }
-.hero-container::before {
-    content: '';
-    position: absolute;
+@keyframes linesDrift {
+    0% { background-position: 0 0; }
+    100% { background-position: 168px 168px; }
+}
+
+/* ---------- Splash / title bar ---------- */
+.hero-container {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+.top-bar-bg {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 130px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(5, 8, 25, 0.35);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
     opacity: 0;
     transform: translateY(-100%);
     animation: barAppear 2.6s cubic-bezier(0.25, 1, 0.5, 1) 2s forwards;
-    z-index: 1;
+    z-index: 2;
 }
 .fade-in-text {
     position: absolute;
@@ -43,42 +77,61 @@ body, html {
     font-size: 3.5rem;
     font-weight: 700;
     letter-spacing: 2px;
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+    text-shadow: 0 0 24px rgba(120, 170, 255, 0.35);
     opacity: 0;
-    animation: textAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards, 
+    animation: textAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards,
                textMoveToBar 2.6s cubic-bezier(0.25, 1, 0.5, 1) 2s forwards;
-    z-index: 2;
 }
 .fade-in-name {
     position: absolute;
     top: 58%;
     left: 50%;
     transform: translate(-50%, 0);
-    color: rgba(255, 255, 255, 0.65);
-    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.05rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     opacity: 0;
     animation: nameAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
-    z-index: 2;
 }
 
-/* ---------- Sections below hero ---------- */
+/* ---------- Content area ---------- */
+.content-area {
+    position: fixed;
+    top: 130px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    overflow-y: auto;
+    padding: 70px 10%;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: contentAppear 1s cubic-bezier(0.16, 1, 0.3, 1) 2.4s forwards;
+}
 .page-section {
-    min-height: 60vh;
-    padding: 100px 10%;
+    display: none;
+    max-width: 640px;
     color: #ffffff;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    animation: sectionFade 0.5s ease forwards;
+}
+.page-section.active {
+    display: block;
 }
 .page-section h2 {
-    font-size: 2.2rem;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+    font-size: 2.1rem;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+    color: #f4ede1;
 }
 .page-section p {
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    max-width: 600px;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+@keyframes sectionFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ---------- Menu toggle button ---------- */
@@ -106,21 +159,15 @@ body, html {
     border-radius: 2px;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
-.menu-toggle.active span:nth-child(1) {
-    transform: translateY(16px) rotate(45deg);
-}
-.menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-.menu-toggle.active span:nth-child(3) {
-    transform: translateY(-16px) rotate(-45deg);
-}
+.menu-toggle.active span:nth-child(1) { transform: translateY(16px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-16px) rotate(-45deg); }
 
 /* ---------- Overlay ---------- */
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(5, 8, 20, 0.65);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease;
@@ -138,11 +185,12 @@ body, html {
     right: 0;
     width: 320px;
     max-width: 80%;
-    height: 100vh;
-    background: rgba(10, 10, 30, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    height: 100%;
+    background: rgba(14, 18, 40, 0.88);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
     border-left: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.35);
     transform: translateX(100%);
     transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 20;
@@ -167,76 +215,67 @@ body, html {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 26px;
 }
 .sidebar-link {
+    position: relative;
     color: #ffffff;
     text-decoration: none;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 1.3rem;
-    letter-spacing: 1px;
-    opacity: 0.85;
-    transition: opacity 0.2s ease, padding-left 0.2s ease;
+    letter-spacing: 0.5px;
+    opacity: 0.75;
+    width: fit-content;
+    transition: opacity 0.2s ease, padding-left 0.2s ease, color 0.2s ease;
+}
+.sidebar-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: #e8b775;
+    transition: width 0.25s ease;
 }
 .sidebar-link:hover {
     opacity: 1;
     padding-left: 6px;
 }
+.sidebar-link:hover::after,
+.sidebar-link.current::after {
+    width: 100%;
+}
+.sidebar-link.current {
+    opacity: 1;
+    color: #f4ede1;
+}
 
 @keyframes gradientFadeIn {
-    0% {
-        opacity: 0;
-        background-position: 0% 50%;
-    }
-    100% {
-        opacity: 1;
-        background-position: 100% 50%;
-    }
+    0% { opacity: 0; background-position: 0% 50%; }
+    100% { opacity: 1; background-position: 100% 50%; }
 }
 @keyframes gradientDirectionSwitch {
-    0% {
-        background: linear-gradient(135deg, #050520, #1a0b36, #002b49);
-    }
-    100% {
-        background: linear-gradient(-180deg, #050520, #1a0b36, #002b49);
-    }
+    0% { background: linear-gradient(135deg, #050520, #1a0b36, #002b49); }
+    100% { background: linear-gradient(-180deg, #050520, #1a0b36, #002b49); }
 }
 @keyframes textAppear {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, 25px);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(-50%, 0);
-    }
+    0% { opacity: 0; transform: translate(-50%, 25px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
 }
 @keyframes textMoveToBar {
-    0% {
-        top: 50%;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    100% {
-        top: 65px;
-        transform: translate(-50%, -50%) scale(0.75);
-    }
+    0% { top: 50%; transform: translate(-50%, -50%) scale(1); }
+    100% { top: 65px; transform: translate(-50%, -50%) scale(0.75); }
 }
 @keyframes nameAppear {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, 15px);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(-50%, 0);
-    }
+    0% { opacity: 0; transform: translate(-50%, 15px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
 }
 @keyframes barAppear {
-    0% {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(-100%); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes contentAppear {
+    0% { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
