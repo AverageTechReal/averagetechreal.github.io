@@ -5,94 +5,63 @@
     box-sizing: border-box;
 }
 
-body {
+body, html {
+    width: 100%;
+    height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #E0E0E0; /* Light Grey Background */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* --- Header --- */
-.site-header {
-    background-color: #000040; /* Dark Navy Background */
-    color: white;
-    padding: 40px 0;
-    text-align: center;
-}
-
-.site-header h1 {
-    font-size: 2.5rem;
-    font-weight: 300;
-}
-
-/* --- Main Content Grid --- */
-.main-content {
-    flex: 1; /* Pushes footer down */
-    padding: 60px 0;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1f); /* 4 equal columns */
-    grid-template-rows: repeat(3, 150px); /* 3 equal rows of 150px height */
-    gap: 20px; /* Space between grid items */
-    justify-items: center; /* Centers items horizontally in their cell */
-    align-items: center;   /* Centers items vertically in their cell */
-}
-
-.grid-item {
-    width: 120px;  /* Fixed size for the squares */
-    height: 120px;
-}
-
-/* --- Specific Item Placement --- */
-
-/* First square: Row 1, Column 1 */
-.grid-item:nth-child(1) {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-}
-
-/* "stuff" text: Row 2, Column 2 */
-.light-text {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-    color: #757575; /* Mid-grey for "stuff" */
-    font-size: 1.2rem;
+/* --- Animated Gradient Background --- */
+.hero-container {
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    /* Dark blue / purple / cyan gradient */
+    background: linear-gradient(135deg, #050520, #1a0b36, #002b49);
+    background-size: 200% 200%;
+    
+    /* Smooth fade-in easing for the background */
+    animation: gradientFadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Second square: Row 2, Column 3 */
-.grid-item:nth-child(3) {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
+/* --- Cool Text Appearing Animation --- */
+.fade-in-text {
+    color: #ffffff;
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+    
+    /* Initial hidden state */
+    opacity: 0;
+    transform: translateY(25px);
+    
+    /* Animation with custom easing */
+    animation: textAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
 }
 
-/* Third square: Row 3, Column 4 */
-.grid-item:nth-child(4) {
-    grid-column: 4 / 5;
-    grid-row: 3 / 4;
+/* --- Keyframe Animations --- */
+@keyframes gradientFadeIn {
+    0% {
+        opacity: 0;
+        background-position: 0% 50%;
+    }
+    100% {
+        opacity: 1;
+        background-position: 100% 50%;
+    }
 }
 
-/* Square styles */
-.dark-square {
-    background-color: #333333; /* Dark Grey for squares */
-}
-
-/* --- Footer --- */
-.site-footer {
-    background-color: #000040;
-    color: #BDBDBD; /* Lighter grey for footer text */
-    text-align: center;
-    padding: 20px 0;
-    font-size: 0.9rem;
+@keyframes textAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
